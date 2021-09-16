@@ -1,5 +1,7 @@
 #include <windows.h>
 
+enum class MsgUserInput { YES = 6, NO };
+
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
@@ -42,12 +44,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	const TCHAR *str = TEXT("Hello, SDK");
 
+	MsgUserInput input;
+
 	switch (message)
 	{
 		case WM_CREATE:
 			return 0;
 		case WM_LBUTTONDOWN:
-			MessageBox(hwnd, TEXT("마우스 클릭!"), TEXT("마우스 메시지"), MB_YESNO);
+			input = (MsgUserInput)MessageBox(hwnd, TEXT("종료하시겠습니까?"), TEXT("마우스 메시지"), MB_YESNO);
+
+			switch (input)
+			{
+				case MsgUserInput::YES:
+					DestroyWindow(hwnd);
+				case MsgUserInput::NO:
+					break;
+			}
+
 			return 0;
 		case WM_PAINT:
 			hdc = BeginPaint(hwnd, &ps);
