@@ -1,4 +1,4 @@
-ï»¿#include <windows.h>
+#include <windows.h>
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -47,7 +47,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_CREATE:
 			return 0;
 		case WM_LBUTTONDOWN:
-			MessageBox(hwnd, TEXT("ë§ˆìš°ìŠ¤ í´ë¦­!"), TEXT("ë§ˆìš°ìŠ¤ ë©”ì‹œì§€"), MB_YESNO);
+			MessageBox(hwnd, TEXT("¸¶¿ì½º Å¬¸¯!"), TEXT("¸¶¿ì½º ¸Ş½ÃÁö"), MB_YESNO);
 			return 0;
 		case WM_PAINT:
 			hdc = BeginPaint(hwnd, &ps);
