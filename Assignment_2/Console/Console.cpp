@@ -2,6 +2,8 @@
 #include "framework.h"
 #include "Console.h"
 
+#include <locale.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -27,9 +29,87 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
         }
         else
         {
-            CString str;
-            str.LoadString(IDS_APP_TITLE);
-            _tprintf(_T("Hello, from %s!\n"), str);
+            _tsetlocale(LC_ALL, _T("korean"));
+
+            _tprintf(_T("Assignment 2 | Console | 2020136018 김성녕\n\n"));
+
+            // Assignment_2_1
+            _tprintf(_T("Assignment 2_1 | Console\n\n"));
+
+            CTime currentTime = CTime::GetCurrentTime();
+            CString currentTimeStr = currentTime.Format("%Y-%m-%d %H:%M:%S");
+
+            _tprintf(_T("Current time is:\t%s\n\n"), currentTimeStr);
+
+            _tprintf(_T("========================\n\n"));
+
+            // Assignment_2_2
+            _tprintf(_T("Assignment 2_2 | Console\n\n"));
+
+            currentTime = CTime::GetCurrentTime();
+            currentTimeStr = currentTime.Format("%Y-%m-%d %H:%M:%S");
+
+            CTime anniversary = currentTime + CTimeSpan(1000, 0, 0, 0);
+            CString anniversaryStr = anniversary.Format("%Y-%m-%d %H:%M:%S");
+
+            CTimeSpan timeDiff = anniversary - currentTime;
+
+            _tprintf(_T("Current time is:\t%s\n"), currentTimeStr);
+            _tprintf(_T("Your anniversary is:\t%s\n\n"), anniversaryStr);
+            _tprintf(_T("Time Diff: %lld days\n\n"), timeDiff.GetDays());
+
+            _tprintf(_T("========================\n\n"));
+
+            // Assignment_2_3
+            _tprintf(_T("Assignment 2_3 | Console\n\n"));
+
+            CUIntArray array;
+            int sum = 0;
+            double avg = 0;
+
+            for (int i = 1; i <= 100; i++) {
+                array.Add(i);
+                sum += i;
+            }
+
+            avg = sum / 100.0;
+
+            _tprintf(_T("sum: %d\n"), sum);
+            _tprintf(_T("avg: %g\n\n"), avg);
+
+            _tprintf(_T("========================\n\n"));
+
+            // Assignment_2_4
+            _tprintf(_T("Assignment 2_4 | Console\n\n"));
+
+            CList<int> list;
+
+            for (int i = 0; i < 100; i++)
+                list.AddTail(i + 1);
+
+            POSITION pos = list.GetHeadPosition();
+            while (pos != NULL)
+                _tprintf(_T("%d "), list.GetNext(pos));
+            _tprintf(_T("\n\n"));
+
+            int input;
+            _tscanf_s(_T("%d"), &input);
+
+            POSITION prev;
+            pos = list.GetHeadPosition();
+            do
+                prev = pos;
+            while (list.GetNext(pos) != input);
+
+            list.RemoveAt(prev);
+
+            pos = list.GetHeadPosition();
+            _tprintf(_T("\n"));
+            while (pos != NULL)
+                _tprintf(_T("%d "), list.GetNext(pos));
+            _tprintf(_T("\n\n"));
+
+            _tprintf(_T("========================\n"));
         }
     }
     else
