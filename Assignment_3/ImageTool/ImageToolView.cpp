@@ -13,6 +13,8 @@
 #include "ImageToolDoc.h"
 #include "ImageToolView.h"
 
+#include "IppDib.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -27,6 +29,7 @@ BEGIN_MESSAGE_MAP(CImageToolView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CImageToolView 생성/소멸
@@ -103,3 +106,17 @@ CImageToolDoc* CImageToolView::GetDocument() const // 디버그되지 않은 버
 
 
 // CImageToolView 메시지 처리기
+
+
+
+void CImageToolView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	IppDib dib;
+	dib.Load("./res/lenna.bmp");
+
+	CClientDC dc(this);
+	dib.Draw(dc.m_hDC, point.x, point.y);
+
+	CView::OnLButtonDown(nFlags, point);
+}
