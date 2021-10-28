@@ -27,20 +27,20 @@ public:
 	BOOL Save(const char* filename);
 
 	void Draw(HDC hdc, int dx = 0, int dy = 0);
-	void Draw(HDC hdc, int dx, int dy, int dh, DWORD dwRop = SRCCOPY);
-	void Draw(HDC hdc, int dx, int dy, int dh, int sx, int sy, int sw, int sh, DWORD dwRop = SRCCOPY);
+	void Draw(HDC hdc, int dx, int dy, int dw, int dh, DWORD dwRop = SRCCOPY);
+	void Draw(HDC hdc, int dx, int dy, int dw, int dh, int sx, int sy, int sw, int sh, DWORD dwRop = SRCCOPY);
 
-	BOOL CopyClipboard();
+	BOOL CopyToClipboard();
 	BOOL PasteFromClipboard();
 
 	IppDib& operator=(const IppDib& dib);
 
-	LONG		GetWidth()			const { return m_nWidth; };
-	LONG		GetHeight()			const { return m_nHeight; }
-	WORD		GetBitCount()		const { return m_nBitCount; }
-	DWORD		GetBitSize()		const { return m_nDibSize; }
-	LPBITMAP	GetBitmapInfoAddr()	const { return (LPBITMAPINFO)m_pDib; }
-	BYTE*		GetDIBBitsAddr()	const;
-	int			GetPlaetteNums()	const;
-	BOOL		IsValidd()			const { return (m_pDib != NULL); }
+	LONG			GetWidth()			const { return m_nWidth; };
+	LONG			GetHeight()			const { return m_nHeight; }
+	WORD			GetBitCount()		const { return m_nBitCount; }
+	DWORD			GetDibSize()		const { return m_nDibSize; }
+	LPBITMAPINFO	GetBitmapInfoAddr()	const { return (LPBITMAPINFO)m_pDib; }
+	BYTE*			GetDIBitsAddr()		const;
+	int				GetPaletteNums()	const;
+	BOOL			IsValid()			const { return (m_pDib != NULL); }
 };
