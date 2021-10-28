@@ -221,6 +221,7 @@
   <ItemGroup>
     <Image Include="res\IppCreate.ico" />
     <Image Include="res\IppCreateDoc.ico" />
+    <Image Include="res\lenna.bmp" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
