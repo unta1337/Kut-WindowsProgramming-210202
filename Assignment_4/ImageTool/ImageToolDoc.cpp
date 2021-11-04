@@ -27,6 +27,7 @@
 IMPLEMENT_DYNCREATE(CImageToolDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
+	ON_COMMAND(ID_WINDOW_DUPLICATE, &CImageToolDoc::OnWindowDuplicate)
 END_MESSAGE_MAP()
 
 
@@ -174,4 +175,11 @@ BOOL CImageToolDoc::OnOpenDocument(LPCTSTR lpszPathName)
 BOOL CImageToolDoc::OnSaveDocument(LPCTSTR lpszPathName)
 {
 	return m_Dib.Save(CT2A(lpszPathName));
+}
+
+
+void CImageToolDoc::OnWindowDuplicate()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	AfxNewBitmap(m_Dib);
 }
