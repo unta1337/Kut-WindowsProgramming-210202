@@ -53,4 +53,5 @@ public:
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
 	afx_msg void OnWindowDuplicate();
+	afx_msg void OnEditCopy();
 };
