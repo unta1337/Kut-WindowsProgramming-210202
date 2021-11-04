@@ -16,6 +16,8 @@
 
 #include "IppImage/IppDib.h"
 
+#include "CFileNewDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -45,10 +47,22 @@ BOOL CImageToolDoc::OnNewDocument()
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 
-	// TODO: 여기에 재초기화 코드를 추가합니다.
-	// SDI 문서는 이 문서를 다시 사용합니다.
+	BOOL ret = TRUE;
 
-	return TRUE;
+	CFileNewDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		if (dlg.m_nType == 0)
+			ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
+		else
+			ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
+	}
+	else
+	{
+		return FALSE;
+	}
+
+	return ret;
 }
 
 
