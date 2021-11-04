@@ -12,6 +12,7 @@
 #include "ChildFrm.h"
 #include "ImageToolDoc.h"
 #include "ImageToolView.h"
+#include "IppImage/IppDib.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,7 +33,7 @@ END_MESSAGE_MAP()
 
 // CImageToolApp 생성
 
-CImageToolApp::CImageToolApp() noexcept
+CImageToolApp::CImageToolApp() noexcept : m_pNewDib(NULL)
 {
 
 	// 다시 시작 관리자 지원
@@ -191,5 +192,9 @@ void CImageToolApp::OnAppAbout()
 
 // CImageToolApp 메시지 처리기
 
-
-
+// 영상 새 창에 띄우기 전역 함수 정의
+void AfxNewBitmap(IppDib& dib)
+{
+	theApp.m_pNewDib = &dib;
+	AfxGetMainWnd()->SendMessage(WM_COMMAND, ID_FILE_NEW);
+}

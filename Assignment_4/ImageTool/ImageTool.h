@@ -9,16 +9,20 @@
 
 #include "resource.h"       // 주 기호입니다.
 
+#include "IppImage/IppDib.h"
 
 // CImageToolApp:
 // 이 클래스의 구현에 대해서는 ImageTool.cpp을(를) 참조하세요.
 //
+class IppDib;
 
 class CImageToolApp : public CWinApp
 {
 public:
 	CImageToolApp() noexcept;
 
+public:
+	IppDib* m_pNewDib;
 
 // 재정의입니다.
 public:
@@ -31,3 +35,6 @@ public:
 };
 
 extern CImageToolApp theApp;
+
+// 전역 함수 선언
+void AfxNewBitmap(IppDib& dib);

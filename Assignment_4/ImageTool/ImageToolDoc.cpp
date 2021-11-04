@@ -50,16 +50,24 @@ BOOL CImageToolDoc::OnNewDocument()
 	BOOL ret = TRUE;
 
 	CFileNewDlg dlg;
-	if (dlg.DoModal() == IDOK)
+	if (theApp.m_pNewDib == NULL)
 	{
-		if (dlg.m_nType == 0)
-			ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
+		if (dlg.DoModal() == IDOK)
+		{
+			if (dlg.m_nType == 0)
+				ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
+			else
+				ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
+		}
 		else
-			ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
+		{
+			return FALSE;
+		}
 	}
 	else
 	{
-		return FALSE;
+		m_Dib = *(theApp.m_pNewDib);
+		theApp.m_pNewDib = NULL;
 	}
 
 	return ret;
