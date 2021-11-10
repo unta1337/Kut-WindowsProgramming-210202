@@ -25,6 +25,7 @@ IMPLEMENT_DYNCREATE(CImageToolDoc, CDocument)
 BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
 	ON_COMMAND(ID_WINDOW_DUPLICATE, &CImageToolDoc::OnWindowDuplicate)
 	ON_COMMAND(ID_EDIT_COPY, &CImageToolDoc::OnEditCopy)
+	ON_COMMAND(ID_IMAGE_INVERSE, &CImageToolDoc::OnImageInverse)
 END_MESSAGE_MAP()
 
 
@@ -190,4 +191,10 @@ void CImageToolDoc::OnEditCopy()
 {
 	if (m_Dib.IsValid())
 		m_Dib.CopyToClipboard();
+}
+
+
+void CImageToolDoc::OnImageInverse()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
