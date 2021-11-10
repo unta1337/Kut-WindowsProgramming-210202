@@ -22,6 +22,14 @@
 #define new DEBUG_NEW
 #endif
 
+#define CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img) \
+	static IppByteImage img; \
+	IppDibToImage(m_Dib, img);
+
+#define CONVERT_BYTEIMAGE_TO_DIB(img, dib) \
+	static IppDib dib; \
+	IppImageToDib(img, dib);
+
 // CImageToolDoc
 
 IMPLEMENT_DYNCREATE(CImageToolDoc, CDocument)
@@ -200,15 +208,9 @@ void CImageToolDoc::OnEditCopy()
 
 void CImageToolDoc::OnImageInverse()
 {
-	// IppDib에서 IppImage으로 변환.
-	IppByteImage img;
-	IppDibToImage(m_Dib, img);
-
+	CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img);
 	IppInverse(img);
-
-	// IppImage에서 IppDib으로 변환.
-	IppDib dib;
-	IppImageToDib(img, dib);
+	CONVERT_BYTEIMAGE_TO_DIB(img, dib);
 
 	// Dib 영상 출력.
 	AfxPrintInfo(_T("[반전] 입력 영상: %s"), GetTitle());

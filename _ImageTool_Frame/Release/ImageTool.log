@@ -1,13 +1,7 @@
-﻿  ChildFrm.cpp
-  FileNewDlg.cpp
-  ImageTool.cpp
-  ImageToolDoc.cpp
-  ImageToolView.cpp
-  MainFrm.cpp
-  OutputWnd.cpp
+﻿  ImageToolDoc.cpp
   코드를 생성하고 있습니다.
-  0 of 473 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 473 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   ImageTool.vcxproj -> C:\Users\admin\Desktop\Kut-WindowsProgramming-210202\_ImageTool_Frame\Release\ImageTool.exe
