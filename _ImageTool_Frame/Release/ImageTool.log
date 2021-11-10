@@ -1,0 +1,15 @@
+﻿  stdafx.cpp
+  ChildFrm.cpp
+  FileNewDlg.cpp
+  ImageTool.cpp
+  ImageToolDoc.cpp
+  ImageToolView.cpp
+  IppConvert.cpp
+  IppDib.cpp
+  MainFrm.cpp
+  OutputWnd.cpp
+  Generating code
+  All 457 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ImageTool.vcxproj -> C:\Young\Lecture\2021_2학기\Windows_Programming\이론\Visual_C++_영상처리프로그래밍\강의자료\Visual_C++_영상처리프로그래밍_예제_소스\source\ch05\ImageTool\Release\ImageTool.exe
+  ImageTool.vcxproj -> C:\Young\Lecture\2021_2학기\Windows_Programming\이론\Visual_C++_영상처리프로그래밍\강의자료\Visual_C++_영상처리프로그래밍_예제_소스\source\ch05\ImageTool\Release\ImageTool.pdb (Full PDB)
