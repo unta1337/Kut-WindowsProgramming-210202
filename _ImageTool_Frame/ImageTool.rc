@@ -73,9 +73,13 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\ImageTool.ico"
+
 IDR_ImageToolTYPE       ICON                    "res\\ImageToolDoc.ico"
+
 IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
 IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -83,7 +87,9 @@ IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -213,6 +219,10 @@ BEGIN
     POPUP "도움말(&H)"
     BEGIN
         MENUITEM "ImageTool 정보(&A)...",         ID_APP_ABOUT
+    END
+    POPUP "이미지(&I)"
+    BEGIN
+        MENUITEM "반전(&I)",                      ID_IMAGE_INVERSE
     END
 END
 

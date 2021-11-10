@@ -14,6 +14,10 @@
 
 #include <propkey.h>
 
+#include "IppImage/IppImage.h" 
+#include "IppImage/IppConvert.h" 
+#include "IppImage/IppEnhance.h" 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -196,5 +200,17 @@ void CImageToolDoc::OnEditCopy()
 
 void CImageToolDoc::OnImageInverse()
 {
-	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	// IppDib에서 IppImage으로 변환.
+	IppByteImage img;
+	IppDibToImage(m_Dib, img);
+
+	IppInverse(img);
+
+	// IppImage에서 IppDib으로 변환.
+	IppDib dib;
+	IppImageToDib(img, dib);
+
+	// Dib 영상 출력.
+	AfxPrintInfo(_T("[반전] 입력 영상: %s"), GetTitle());
+	AfxNewBitmap(dib);
 }
