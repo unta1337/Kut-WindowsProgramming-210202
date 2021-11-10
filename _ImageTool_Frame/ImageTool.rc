@@ -207,6 +207,10 @@ BEGIN
         MENUITEM "3배 보기(&3)",                   ID_VIEW_ZOOM3
         MENUITEM "4배 보기(&4)",                   ID_VIEW_ZOOM4
     END
+    POPUP "이미지(&I)"
+    BEGIN
+        MENUITEM "반전(&I)",                      ID_IMAGE_INVERSE
+    END
     POPUP "창(&W)"
     BEGIN
         MENUITEM "새 창(&N)",                     ID_WINDOW_NEW
@@ -219,10 +223,6 @@ BEGIN
     POPUP "도움말(&H)"
     BEGIN
         MENUITEM "ImageTool 정보(&A)...",         ID_APP_ABOUT
-    END
-    POPUP "이미지(&I)"
-    BEGIN
-        MENUITEM "반전(&I)",                      ID_IMAGE_INVERSE
     END
 END
 
