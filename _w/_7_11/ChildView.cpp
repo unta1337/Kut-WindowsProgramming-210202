@@ -78,7 +78,7 @@ void CChildView::OnPaint()
 		dc.SelectObject(&pen);
 		dc.TextOut(50, 25 + i * 25, PenStyle[i], lstrlen(PenStyle[i]));
 		dc.MoveTo(200, 25 + i * 25);
-		dc.LineTo(200, 25 + i * 25);
+		dc.LineTo(500, 25 + i * 25);
 	}
 
 	CPen blackPen(PS_SOLID, 1, RGB(0, 0, 0));
@@ -91,7 +91,7 @@ void CChildView::OnPaint()
 
 	dc.SelectObject(&blackPen);
 	dc.Rectangle(250, 200, 350, 300);
-	CPen pen2(PS_INSIDEFRAME, 20, RGB(255, 0, 0));
+	CPen pen2(PS_INSIDEFRAME, 20, RGB(0, 255, 0));
 	dc.SelectObject(&pen2);
 	dc.Ellipse(250, 200, 350, 300);
 }
