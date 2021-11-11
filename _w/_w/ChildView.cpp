@@ -25,6 +25,7 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -50,3 +51,11 @@ void CChildView::OnPaint()
 	dc.TextOut(50, 50, CString(_T("안녕하세요")));
 }
 
+
+
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CWnd::OnLButtonDown(nFlags, point);
+}
