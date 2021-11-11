@@ -48,14 +48,17 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
+	// 클라이언트 영역의 좌표를 얻는다.
 	CRect rect;
 	GetClientRect(&rect);
 
+	// 수평선과 수직선을 그린다.
 	dc.MoveTo(0, rect.bottom / 2);
 	dc.LineTo(rect.right, rect.bottom / 2);
 	dc.MoveTo(rect.right / 2, 0);
 	dc.LineTo(rect.right / 2, rect.bottom);
 
+	// 마름모꼴을 그린다.
 	POINT points[] =
 	{
 		{ rect.right / 2, 0 },
