@@ -59,7 +59,7 @@ void CChildView::OnPaint()
 	POINT points[] =
 	{
 		{ rect.right / 2, 0 },
-		{rect.right, rect.bottom / 2 },
+		{ rect.right, rect.bottom / 2 },
 		{ rect.right / 2, rect.bottom },
 		{ 0, rect.bottom / 2 },
 		{ rect.right / 2, 0 }
