@@ -47,9 +47,52 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 void CChildView::OnPaint() 
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
-	
-	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-	
-	// 그리기 메시지에 대해서는 CWnd::OnPaint()를 호출하지 마십시오.
+
+	// 다양한 펜 종류.
+	int nPenStyle[] =
+	{
+		PS_SOLID,
+		PS_DASH,
+		PS_DOT,
+		PS_DASHDOT,
+		PS_DASHDOTDOT,
+		PS_NULL,
+		PS_INSIDEFRAME
+	};
+
+	TCHAR* PenStyle[] =
+	{
+		_T("PS_SOLID"),
+		_T("PS_DASH"),
+		_T("PS_DOT"),
+		_T("PS_DASHDOT"),
+		_T("PS_DASHDOTDOT"),
+		_T("PS_NULL"),
+		_T("PS_INSIDEFRAME")
+	};
+
+	dc.SetTextAlign(TA_BASELINE);
+	for (int i = 0; i < sizeof(nPenStyle) / sizeof(nPenStyle[0]); i++)
+	{
+		CPen pen(nPenStyle[i], 1, RGB(0, 0, 255));
+		dc.SelectObject(&pen);
+		dc.TextOut(50, 25 + i * 25, PenStyle[i], lstrlen(PenStyle[i]));
+		dc.MoveTo(200, 25 + i * 25);
+		dc.LineTo(200, 25 + i * 25);
+	}
+
+	CPen blackPen(PS_SOLID, 1, RGB(0, 0, 0));
+
+	dc.SelectObject(&blackPen);
+	dc.Rectangle(50, 200, 150, 300);
+	CPen pen1(PS_SOLID, 20, RGB(255, 0, 0));
+	dc.SelectObject(&pen1);
+	dc.Ellipse(50, 200, 150, 300);
+
+	dc.SelectObject(&blackPen);
+	dc.Rectangle(250, 200, 350, 300);
+	CPen pen2(PS_INSIDEFRAME, 20, RGB(255, 0, 0));
+	dc.SelectObject(&pen2);
+	dc.Ellipse(250, 200, 350, 300);
 }
 
