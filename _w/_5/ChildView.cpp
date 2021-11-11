@@ -47,8 +47,12 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 void CChildView::OnPaint() 
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
-	for (int x = 0; x < 256; x++)
-		for (int y = 0; y < 256; y++)
+
+	int rep = 256;
+	//int rep = 256 * 5;
+
+	for (int x = 0; x < rep; x++)
+		for (int y = 0; y < rep; y++)
 			dc.SetPixel(x, y, RGB(x, y, 0));
 }
 
