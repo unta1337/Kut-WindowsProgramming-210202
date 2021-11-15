@@ -22,13 +22,6 @@
 #define new DEBUG_NEW
 #endif
 
-#define CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img) \
-	static IppByteImage img; \
-	IppDibToImage(m_Dib, img);
-
-#define CONVERT_BYTEIMAGE_TO_DIB(img, dib) \
-	static IppDib dib; \
-	IppImageToDib(img, dib);
 
 // CImageToolDoc
 
@@ -208,9 +201,26 @@ void CImageToolDoc::OnEditCopy()
 
 void CImageToolDoc::OnImageInverse()
 {
-	CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img);
-	IppInverse(img);
-	CONVERT_BYTEIMAGE_TO_DIB(img, dib);
+	IppDib dib;
+
+	IppByteImage bImg;
+	IppRgbImage rgbImg;
+
+	switch (m_Dib.GetBitCount())
+	{
+	case 8:
+		IppDibToImage(m_Dib, bImg);
+		IppInverse(bImg);
+		IppImageToDib(bImg, dib);
+		break;
+	case 24:
+		IppDibToImage(m_Dib, rgbImg);
+		IppInverse(rgbImg);
+		IppImageToDib(rgbImg, dib);
+		break;
+	default:
+		break;
+	}
 
 	// Dib 영상 출력.
 	AfxPrintInfo(_T("[반전] 입력 영상: %s"), GetTitle());
