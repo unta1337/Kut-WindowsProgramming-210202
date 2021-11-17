@@ -26,9 +26,12 @@
 #define IDS_FIND_TAB                    302
 #define IDS_EDIT_MENU                   306
 #define IDD_FILE_NEW                    310
+#define IDD_BRIGHTNESS                  311
 #define IDC_WIDTH                       1000
 #define IDC_HEIGHT                      1001
 #define IDC_IMAGE_TYPE                  1002
+#define IDC_BRIGHTNESS_SLIDER           1004
+#define IDC_BRIGHTNESS_EDIT             1006
 #define ID_WINDOW_DUPLICATE             32771
 #define ID_VIEW_ZOOM1                   32772
 #define ID_VIEW_ZOOM2                   32773
@@ -43,9 +46,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_RESOURCE_VALUE        313
 #define _APS_NEXT_COMMAND_VALUE         32780
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_CONTROL_VALUE         1007
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
