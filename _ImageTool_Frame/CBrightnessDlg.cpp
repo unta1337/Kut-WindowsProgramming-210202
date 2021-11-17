@@ -27,11 +27,13 @@ void CBrightnessDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BRIGHTNESS_SLIDER, m_sliderBrightness);
-	//DDX_Control(pDX, IDC_BRIGHTNESS_EDIT, m_nBrightness);
+	DDX_Text(pDX, IDC_BRIGHTNESS_EDIT, m_nBrightness);
 }
 
 
 BEGIN_MESSAGE_MAP(CBrightnessDlg, CDialogEx)
+	ON_WM_HSCROLL()
+	ON_EN_CHANGE(IDC_BRIGHTNESS_EDIT, &CBrightnessDlg::OnEnChangeBrightnessEdit)
 END_MESSAGE_MAP()
 
 
@@ -47,4 +49,24 @@ BOOL CBrightnessDlg::OnInitDialog()
 	m_sliderBrightness.SetPageSize(32);
 
 	return TRUE;
+}
+
+
+void CBrightnessDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+{
+	// 밝기 조절 슬라이드바에서 발생한 WM_HSCROLL 메시지 처리
+	if (m_sliderBrightness.GetSafeHwnd() == pScrollBar->GetSafeHwnd())
+	{
+		m_nBrightness = m_sliderBrightness.GetPos();
+		UpdateData(FALSE);
+	}
+
+	CDialogEx::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+
+void CBrightnessDlg::OnEnChangeBrightnessEdit()
+{
+	UpdateData(TRUE);
+	m_sliderBrightness.SetPos(m_nBrightness);
 }

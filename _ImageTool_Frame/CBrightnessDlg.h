@@ -24,4 +24,6 @@ public:
 	CSliderCtrl m_sliderBrightness;
 	virtual BOOL OnInitDialog();
 	int m_nBrightness;
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnEnChangeBrightnessEdit();
 };

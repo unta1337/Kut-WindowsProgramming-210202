@@ -18,6 +18,8 @@
 #include "IppImage/IppConvert.h" 
 #include "IppImage/IppEnhance.h" 
 
+#include "CBrightnessDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -31,6 +33,7 @@ BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
 	ON_COMMAND(ID_WINDOW_DUPLICATE, &CImageToolDoc::OnWindowDuplicate)
 	ON_COMMAND(ID_EDIT_COPY, &CImageToolDoc::OnEditCopy)
 	ON_COMMAND(ID_IMAGE_INVERSE, &CImageToolDoc::OnImageInverse)
+	ON_COMMAND(ID_32780, &CImageToolDoc::OnBrightness)
 END_MESSAGE_MAP()
 
 
@@ -224,5 +227,38 @@ void CImageToolDoc::OnImageInverse()
 
 	// Dib 영상 출력.
 	AfxPrintInfo(_T("[반전] 입력 영상: %s"), GetTitle());
+	AfxNewBitmap(dib);
+}
+
+
+void CImageToolDoc::OnBrightness()
+{
+	CBrightnessDlg dlg;
+
+	IppDib dib;
+
+	IppByteImage bImg;
+	IppRgbImage rgbImg;
+
+	if (dlg.DoModal() == IDOK)
+	{
+		switch (m_Dib.GetBitCount())
+		{
+		case 8:
+			IppDibToImage(m_Dib, bImg);
+			IppBrightness(bImg, dlg.m_nBrightness);
+			IppImageToDib(bImg, dib);
+			break;
+		case 24:
+			IppDibToImage(m_Dib, rgbImg);
+			IppBrightness(rgbImg, dlg.m_nBrightness);
+			IppImageToDib(rgbImg, dib);
+			break;
+		default:
+			break;
+		}
+	}
+
+	AfxPrintInfo(_T("[밝기 조절] 입력 영상: %s, 밝기: %d"), GetTitle(), dlg.m_nBrightness);
 	AfxNewBitmap(dib);
 }
