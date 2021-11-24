@@ -211,6 +211,8 @@ BEGIN
     BEGIN
         MENUITEM "반전(&I)",                      ID_IMAGE_INVERSE
         MENUITEM "밝기 조절(&B)",                   ID_32780
+        MENUITEM SEPARATOR
+        MENUITEM "이미지 연산(&O)",                  ID_OPERATOR
     END
     POPUP "창(&W)"
     BEGIN

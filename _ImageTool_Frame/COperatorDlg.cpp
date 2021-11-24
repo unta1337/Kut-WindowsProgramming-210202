@@ -5,7 +5,7 @@
 #include "ImageTool.h"
 #include "COperatorDlg.h"
 #include "afxdialogex.h"
-
+#include "ImageToolDoc.h"
 
 // COperatorDlg 대화 상자
 
@@ -13,7 +13,7 @@ IMPLEMENT_DYNAMIC(COperatorDlg, CDialogEx)
 
 COperatorDlg::COperatorDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_OPERATOR, pParent)
-	, m_nFunction(0)
+	, m_nFunction(0), m_pDoc1(NULL), m_pDoc2(NULL)
 {
 
 }
@@ -32,6 +32,7 @@ void COperatorDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(COperatorDlg, CDialogEx)
+	ON_BN_CLICKED(IDOK, &COperatorDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -51,7 +52,7 @@ BOOL COperatorDlg::OnInitDialog()
 	while (pos != NULL)
 	{
 		CImageToolDoc* pDoc = (CImageToolDoc*)pApp->m_pImageDocTemplate->GetNextDoc(pos);
-		if (pDoc->m_Dib.GetBitcount() != 8)
+		if (pDoc->m_Dib.GetBitCount() != 8)
 			continue;;
 
 		strTitle = pDoc->GetTitle();
@@ -70,4 +71,14 @@ BOOL COperatorDlg::OnInitDialog()
 	if (nIndex > 1) m_comboImage2.SetCurSel(1);
 
 	return TRUE;
+}
+
+
+void COperatorDlg::OnBnClickedOk()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_pDoc1 = (CImageToolDoc*)m_comboImage1.GetItemDataPtr(m_comboImage1.GetCurSel());
+	m_pDoc2 = (CImageToolDoc*)m_comboImage1.GetItemDataPtr(m_comboImage1.GetCurSel());
+
+	CDialogEx::OnOK();
 }

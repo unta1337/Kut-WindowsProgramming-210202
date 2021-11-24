@@ -1,10 +1,10 @@
-
-// ImageToolDoc.cpp : CImageToolDoc Å¬·¡½ºÀÇ ±¸Çö
+ï»¿
+// ImageToolDoc.cpp : CImageToolDoc í´ë˜ìŠ¤ì˜ êµ¬í˜„
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS´Â ¹Ì¸® º¸±â, Ãà¼ÒÆÇ ±×¸² ¹× °Ë»ö ÇÊÅÍ Ã³¸®±â¸¦ ±¸ÇöÇÏ´Â ATL ÇÁ·ÎÁ§Æ®¿¡¼­ Á¤ÀÇÇÒ ¼ö ÀÖÀ¸¸ç
-// ÇØ´ç ÇÁ·ÎÁ§Æ®¿Í ¹®¼­ ÄÚµå¸¦ °øÀ¯ÇÏµµ·Ï ÇØ Áİ´Ï´Ù.
+// SHARED_HANDLERSëŠ” ë¯¸ë¦¬ ë³´ê¸°, ì¶•ì†ŒíŒ ê·¸ë¦¼ ë° ê²€ìƒ‰ í•„í„° ì²˜ë¦¬ê¸°ë¥¼ êµ¬í˜„í•˜ëŠ” ATL í”„ë¡œì íŠ¸ì—ì„œ ì •ì˜í•  ìˆ˜ ìˆìœ¼ë©°
+// í•´ë‹¹ í”„ë¡œì íŠ¸ì™€ ë¬¸ì„œ ì½”ë“œë¥¼ ê³µìœ í•˜ë„ë¡ í•´ ì¤ë‹ˆë‹¤.
 #ifndef SHARED_HANDLERS
 #include "ImageTool.h"
 #endif
@@ -34,14 +34,15 @@ BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
 	ON_COMMAND(ID_EDIT_COPY, &CImageToolDoc::OnEditCopy)
 	ON_COMMAND(ID_IMAGE_INVERSE, &CImageToolDoc::OnImageInverse)
 	ON_COMMAND(ID_32780, &CImageToolDoc::OnBrightness)
+	ON_COMMAND(ID_OPERATOR, &CImageToolDoc::OnOperator)
 END_MESSAGE_MAP()
 
 
-// CImageToolDoc »ı¼º/¼Ò¸ê
+// CImageToolDoc ìƒì„±/ì†Œë©¸
 
 CImageToolDoc::CImageToolDoc()
 {
-	// TODO: ¿©±â¿¡ ÀÏÈ¸¼º »ı¼º ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì¼íšŒì„± ìƒì„± ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 
 }
 
@@ -61,9 +62,9 @@ BOOL CImageToolDoc::OnNewDocument()
 		CFileNewDlg dlg;
 		if (dlg.DoModal() == IDOK)
 		{
-			if (dlg.m_nType == 0) // ±×·¹ÀÌ½ºÄÉÀÏ ºñÆ®¸Ê
+			if (dlg.m_nType == 0) // ê·¸ë ˆì´ìŠ¤ì¼€ì¼ ë¹„íŠ¸ë§µ
 				ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
-			else // Æ®·çÄÃ·¯ ºñÆ®¸Ê
+			else // íŠ¸ë£¨ì»¬ëŸ¬ ë¹„íŠ¸ë§µ
 				ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
 		}
 		else
@@ -89,20 +90,20 @@ void CImageToolDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		// TODO: ¿©±â¿¡ ÀúÀå ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+		// TODO: ì—¬ê¸°ì— ì €ì¥ ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	}
 	else
 	{
-		// TODO: ¿©±â¿¡ ·Îµù ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+		// TODO: ì—¬ê¸°ì— ë¡œë”© ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	}
 }
 
 #ifdef SHARED_HANDLERS
 
-// Ãà¼ÒÆÇ ±×¸²À» Áö¿øÇÕ´Ï´Ù.
+// ì¶•ì†ŒíŒ ê·¸ë¦¼ì„ ì§€ì›í•©ë‹ˆë‹¤.
 void CImageToolDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
-	// ¹®¼­ÀÇ µ¥ÀÌÅÍ¸¦ ±×¸®·Á¸é ÀÌ ÄÚµå¸¦ ¼öÁ¤ÇÏ½Ê½Ã¿À.
+	// ë¬¸ì„œì˜ ë°ì´í„°ë¥¼ ê·¸ë¦¬ë ¤ë©´ ì´ ì½”ë“œë¥¼ ìˆ˜ì •í•˜ì‹­ì‹œì˜¤.
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
 
 	CString strText = _T("TODO: implement thumbnail drawing here");
@@ -120,14 +121,14 @@ void CImageToolDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 	dc.SelectObject(pOldFont);
 }
 
-// °Ë»ö Ã³¸®±â¸¦ Áö¿øÇÕ´Ï´Ù.
+// ê²€ìƒ‰ ì²˜ë¦¬ê¸°ë¥¼ ì§€ì›í•©ë‹ˆë‹¤.
 void CImageToolDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
-	// ¹®¼­ÀÇ µ¥ÀÌÅÍ¿¡¼­ °Ë»ö ÄÜÅÙÃ÷¸¦ ¼³Á¤ÇÕ´Ï´Ù.
-	// ÄÜÅÙÃ÷ ºÎºĞÀº ";"·Î ±¸ºĞµÇ¾î¾ß ÇÕ´Ï´Ù.
+	// ë¬¸ì„œì˜ ë°ì´í„°ì—ì„œ ê²€ìƒ‰ ì½˜í…ì¸ ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+	// ì½˜í…ì¸  ë¶€ë¶„ì€ ";"ë¡œ êµ¬ë¶„ë˜ì–´ì•¼ í•©ë‹ˆë‹¤.
 
-	// ¿¹: strSearchContent = _T("point;rectangle;circle;ole object;");
+	// ì˜ˆ: strSearchContent = _T("point;rectangle;circle;ole object;");
 	SetSearchContent(strSearchContent);
 }
 
@@ -151,7 +152,7 @@ void CImageToolDoc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// CImageToolDoc Áø´Ü
+// CImageToolDoc ì§„ë‹¨
 
 #ifdef _DEBUG
 void CImageToolDoc::AssertValid() const
@@ -166,7 +167,7 @@ void CImageToolDoc::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CImageToolDoc ¸í·É
+// CImageToolDoc ëª…ë ¹
 
 
 BOOL CImageToolDoc::OnOpenDocument(LPCTSTR lpszPathName)
@@ -176,7 +177,7 @@ BOOL CImageToolDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 	BOOL res = m_Dib.Load(CT2A(lpszPathName));
 	if (res)
-		AfxPrintInfo(_T("[ÆÄÀÏ ¿­±â] ÆÄÀÏ °æ·Î: %s, °¡·Î Å©±â: %dÇÈ¼¿, ¼¼·Î Å©±â: %dÇÈ¼¿, »ö»ó¼ö: %d"),
+		AfxPrintInfo(_T("[íŒŒì¼ ì—´ê¸°] íŒŒì¼ ê²½ë¡œ: %s, ê°€ë¡œ í¬ê¸°: %dí”½ì…€, ì„¸ë¡œ í¬ê¸°: %dí”½ì…€, ìƒ‰ìƒìˆ˜: %d"),
 			lpszPathName, m_Dib.GetWidth(), m_Dib.GetHeight(), 0x01 << m_Dib.GetBitCount());
 
 	return res;
@@ -225,8 +226,8 @@ void CImageToolDoc::OnImageInverse()
 		break;
 	}
 
-	// Dib ¿µ»ó Ãâ·Â.
-	AfxPrintInfo(_T("[¹İÀü] ÀÔ·Â ¿µ»ó: %s"), GetTitle());
+	// Dib ì˜ìƒ ì¶œë ¥.
+	AfxPrintInfo(_T("[ë°˜ì „] ì…ë ¥ ì˜ìƒ: %s"), GetTitle());
 	AfxNewBitmap(dib);
 }
 
@@ -259,6 +260,45 @@ void CImageToolDoc::OnBrightness()
 		}
 	}
 
-	AfxPrintInfo(_T("[¹à±â Á¶Àı] ÀÔ·Â ¿µ»ó: %s, ¹à±â: %d"), GetTitle(), dlg.m_nBrightness);
+	AfxPrintInfo(_T("[ë°ê¸° ì¡°ì ˆ] ì…ë ¥ ì˜ìƒ: %s, ë°ê¸°: %d"), GetTitle(), dlg.m_nBrightness);
 	AfxNewBitmap(dib);
+}
+
+
+void CImageToolDoc::OnArithmeticLogical()
+{
+	CArithmeticLogicalDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		CImageToolDoc* pDoc1 = (CImageToolDoc*)dlg.m_pDoc1;
+		CImageToolDoc* pDoc2 = (CImageToolDoc*)dlg.m_pDoc2;
+
+		CONVERT_DIB_TO_BYTEIMAGE(pDoc1->m_Dib, img1)
+		CONVERT_DIB_TO_BYTEIMAGE(pDoc2->m_Dib, img2)
+		IppByteImage img3;
+
+		bool ret = false;
+
+		switch (dlg.m_nFunction)
+		{
+		case 0: ret = IppAdd(img1, img2, img3);  break;
+		case 1: ret = IppSub(img1, img2, img3);  break;
+		case 2: ret = IppAve(img1, img2, img3);  break;
+		case 3: ret = IppDiff(img1, img2, img3); break;
+		case 4: ret = IppAND(img1, img2, img3);  break;
+		case 5: ret = IppOR(img1, img2, img3);   break;
+		}
+
+		if (ret)
+		{
+			CONVERT_IMAGE_TO_DIB(img3, dib)
+
+			TCHAR* op[] = { _T("ï¿½ãƒë€"), _T("ï§ê¾©ë€"), _T("ï¿½ë¯í‡"), _T("ï§¡â‘¥ì” "), _T("ï¿½ì‡°â” AND"), _T("ï¿½ì‡°â” OR") };
+			AfxPrintInfo(_T("[ï¿½ê³—ë‹  è«›ï¿½ ï¿½ì‡°â” ï¿½ê³—ê¶›] [%s] ï¿½ë‚…ì ° ï¿½ê³¸ê¸½ #1: %s, ï¿½ë‚…ì ° ï¿½ê³¸ê¸½ #2: %s"), 
+				op[dlg.m_nFunction], pDoc1->GetTitle(), pDoc2->GetTitle());
+			AfxNewBitmap(dib);
+		}
+		else
+			AfxMessageBox(_T("ï¿½ê³¸ê¸½ï¿½ï¿½ ï¿½Ñˆë¦°åª›ï¿½ ï¿½ã…»ì«­ï¿½ëˆë–!"));
+	}
 }

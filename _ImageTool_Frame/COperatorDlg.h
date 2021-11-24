@@ -24,5 +24,8 @@ public:
 	CComboBox m_comboImage1;
 	CComboBox m_comboImage2;
 	int m_nFunction;
+	void* m_pDoc1;
+	void* m_pDoc2;
 	virtual BOOL OnInitDialog();
+	afx_msg void OnBnClickedOk();
 };
