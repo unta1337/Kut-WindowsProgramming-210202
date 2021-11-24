@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="CBrightnessDlg.h" />
     <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="COperatorDlg.h" />
     <ClInclude Include="FileNewDlg.h" />
     <ClInclude Include="ImageTool.h" />
     <ClInclude Include="ImageToolDoc.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="IppImage\IppConvert.h" />
     <ClInclude Include="IppImage\IppDib.h" />
     <ClInclude Include="IppImage\IppEnhance.h" />
+    <ClInclude Include="IppImage\IppEnhanceOp.h" />
     <ClInclude Include="IppImage\IppImage.h" />
     <ClInclude Include="IppImage\RGBBYTE.h" />
     <ClInclude Include="MainFrm.h" />
@@ -209,6 +211,7 @@
   <ItemGroup>
     <ClCompile Include="CBrightnessDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="COperatorDlg.cpp" />
     <ClCompile Include="FileNewDlg.cpp" />
     <ClCompile Include="ImageTool.cpp" />
     <ClCompile Include="ImageToolDoc.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="IppImage\IppConvert.cpp" />
     <ClCompile Include="IppImage\IppDib.cpp" />
     <ClCompile Include="IppImage\IppEnhance.cpp" />
+    <ClCompile Include="IppImage\IppEnhanceOp.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="stdafx.cpp">

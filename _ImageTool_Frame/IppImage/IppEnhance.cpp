@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "IppEnhanceOp.h"
 #include "IppEnhance.h"
 
 void IppInverse(IppByteImage& img)
@@ -47,4 +48,44 @@ void IppBrightness(IppRgbImage& img, int n)
 		p[i].b = limit(p[i].b + n);
 		p[i].g = limit(p[i].g + n);
 	}
+}
+
+bool IppOperator(IppByteImage& img1, IppByteImage& img2, IppByteImage& img3, void (*op)(BYTE*, BYTE*, BYTE*, int))
+{
+	int w = img1.GetWidth();
+	int h = img1.GetHeight();
+
+	if (w != img2.GetWidth() || h != img2.GetHeight())
+		return false;
+
+	img3.CreateImage(w, h);
+
+	int size = img3.GetSize();
+	BYTE* p1 = img1.GetPixels();
+	BYTE* p2 = img2.GetPixels();
+	BYTE* p3 = img3.GetPixels();
+
+	op(p1, p2, p3, size);
+
+	return true;
+}
+
+bool IppOperator(IppRgbImage& img1, IppRgbImage& img2, IppRgbImage& img3, void (*op)(RGBBYTE*, RGBBYTE*, RGBBYTE*, int))
+{
+	int w = img1.GetWidth();
+	int h = img1.GetHeight();
+
+	if (w != img2.GetWidth() || h != img2.GetHeight())
+		return false;
+
+	img3.CreateImage(w, h);
+
+	int size = img3.GetSize();
+	RGBBYTE* p1 = img1.GetPixels();
+	RGBBYTE* p2 = img2.GetPixels();
+	RGBBYTE* p3 = img3.GetPixels();
+
+	op(p1, p2, p3, size);
+
+	return true;
 }
