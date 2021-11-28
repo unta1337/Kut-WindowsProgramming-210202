@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBrightnessDlg.h" />
+    <ClInclude Include="CContrastDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="COperatorDlg.h" />
     <ClInclude Include="FileNewDlg.h" />
@@ -210,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBrightnessDlg.cpp" />
+    <ClCompile Include="CContrastDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="COperatorDlg.cpp" />
     <ClCompile Include="FileNewDlg.cpp" />

@@ -50,6 +50,32 @@ void IppBrightness(IppRgbImage& img, int n)
 	}
 }
 
+void IppContrast(IppByteImage& img, int n)
+{
+	int size = img.GetSize();
+	BYTE* p = img.GetPixels();
+	float n_ = n / 255.0f;
+
+	for (int i = 0; i < size; i++)
+	{
+		p[i] = limit(p[i] + (p[i] - 128) * n_);
+	}
+}
+
+void IppContrast(IppRgbImage& img, int n)
+{
+	int size = img.GetSize();
+	RGBBYTE* p = img.GetPixels();
+	float n_ = n / 255.0f;
+
+	for (int i = 0; i < size; i++)
+	{
+		p[i].r = limit(p[i].r + (p[i].r - 128) * n_);
+		p[i].g = limit(p[i].g + (p[i].g - 128) * n_);
+		p[i].b = limit(p[i].b + (p[i].b - 128) * n_);
+	}
+}
+
 bool IppOperator(IppByteImage& img1, IppByteImage& img2, IppByteImage& img3, void (*op)(BYTE*, BYTE*, BYTE*, int))
 {
 	int w = img1.GetWidth();

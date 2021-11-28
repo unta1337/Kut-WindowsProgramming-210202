@@ -19,6 +19,8 @@
 #include "IppImage/IppEnhance.h" 
 
 #include "CBrightnessDlg.h"
+#include "CContrastDlg.h"
+#include "COperatorDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -35,6 +37,7 @@ BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
 	ON_COMMAND(ID_IMAGE_INVERSE, &CImageToolDoc::OnImageInverse)
 	ON_COMMAND(ID_32780, &CImageToolDoc::OnBrightness)
 	ON_COMMAND(ID_OPERATOR, &CImageToolDoc::OnOperator)
+	ON_COMMAND(ID_32783, &CImageToolDoc::OnContrast)
 END_MESSAGE_MAP()
 
 
@@ -265,40 +268,76 @@ void CImageToolDoc::OnBrightness()
 }
 
 
-void CImageToolDoc::OnArithmeticLogical()
+void CImageToolDoc::OnContrast()
 {
-	CArithmeticLogicalDlg dlg;
+	CContrastDlg dlg;
+
+	IppDib dib;
+
+	IppByteImage bImg;
+	IppRgbImage rgbImg;
+
+	if (dlg.DoModal() == IDOK)
+	{
+		switch (m_Dib.GetBitCount())
+		{
+		case 8:
+			IppDibToImage(m_Dib, bImg);
+			IppContrast(bImg, dlg.m_nContrast);
+			IppImageToDib(bImg, dib);
+			break;
+		case 24:
+			IppDibToImage(m_Dib, rgbImg);
+			IppContrast(rgbImg, dlg.m_nContrast);
+			IppImageToDib(rgbImg, dib);
+			break;
+		default:
+			break;
+		}
+	}
+
+	AfxPrintInfo(_T("[명암비 조절] 입력 영상: %s, 밝기: %d"), GetTitle(), dlg.m_nContrast);
+	AfxNewBitmap(dib);
+}
+
+
+void CImageToolDoc::OnOperator()
+{
+	COperatorDlg dlg;
 	if (dlg.DoModal() == IDOK)
 	{
 		CImageToolDoc* pDoc1 = (CImageToolDoc*)dlg.m_pDoc1;
 		CImageToolDoc* pDoc2 = (CImageToolDoc*)dlg.m_pDoc2;
 
-		CONVERT_DIB_TO_BYTEIMAGE(pDoc1->m_Dib, img1)
-		CONVERT_DIB_TO_BYTEIMAGE(pDoc2->m_Dib, img2)
+		IppByteImage img1;
+		IppByteImage img2;
+
+		IppDibToImage(pDoc1->m_Dib, img1);
+		IppDibToImage(pDoc2->m_Dib, img2);
+
 		IppByteImage img3;
 
 		bool ret = false;
 
 		switch (dlg.m_nFunction)
 		{
-		case 0: ret = IppAdd(img1, img2, img3);  break;
-		case 1: ret = IppSub(img1, img2, img3);  break;
-		case 2: ret = IppAve(img1, img2, img3);  break;
-		case 3: ret = IppDiff(img1, img2, img3); break;
-		case 4: ret = IppAND(img1, img2, img3);  break;
-		case 5: ret = IppOR(img1, img2, img3);   break;
+		case 0: ret = IppOperator(img1, img2, img3, &IppAddOp);  break;
+		case 1: ret = IppOperator(img1, img2, img3, &IppSubOp);  break;
+		case 2: ret = IppOperator(img1, img2, img3, &IppAndOp);  break;
+		case 3: ret = IppOperator(img1, img2, img3, &IppXorOp);  break;
 		}
 
 		if (ret)
 		{
-			CONVERT_IMAGE_TO_DIB(img3, dib)
+			IppDib dib;
+			IppImageToDib(img3, dib);
 
-			TCHAR* op[] = { _T("�㏃뀍"), _T("類꾩뀍"), _T("�됯퇏"), _T("李⑥씠"), _T("�쇰━ AND"), _T("�쇰━ OR") };
-			AfxPrintInfo(_T("[�곗닠 諛� �쇰━ �곗궛] [%s] �낅젰 �곸긽 #1: %s, �낅젰 �곸긽 #2: %s"), 
+			TCHAR* op[] = { _T("덧셈"), _T("뺄셈"), _T("논리곱"), _T("배타적 논리합") };
+			AfxPrintInfo(_T("[이미지 연산] [%s] 이미지 이름 #1: %s, 이미지 이름 #2: %s"), 
 				op[dlg.m_nFunction], pDoc1->GetTitle(), pDoc2->GetTitle());
 			AfxNewBitmap(dib);
 		}
 		else
-			AfxMessageBox(_T("�곸긽�� �ш린媛� �ㅻ쫭�덈떎!"));
+			AfxMessageBox(_T("올바르지 않은 옵션입니다!"));
 	}
 }

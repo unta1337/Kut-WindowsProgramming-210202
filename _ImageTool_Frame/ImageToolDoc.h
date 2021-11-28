@@ -59,4 +59,5 @@ public:
 	afx_msg void OnImageInverse();
 	afx_msg void OnBrightness();
 	afx_msg void OnOperator();
+	afx_msg void OnContrast();
 };
